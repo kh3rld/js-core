@@ -1,17 +1,20 @@
-let escapeStr = '`, \, /, ",'
-let arr = [4, '2']
-let obj = {
+const escapeStr = "`, \, /, \" and '";
+const arr = [4, '2'];
+const obj = {
     str: 'value',
     num: 1,
     bool: true,
-    undef: undefined
-}
-let nested = {
+    undef: undefined,
+};
+const nested = {
     arr: [4, undefined, '2'],
     obj: {
         str: 'value',
         num: 1,
         bool: true,
-        undef: undefined
+        undef: undefined,
     }
-}
+};
+Object.freeze(nested)
+Object.freeze(arr)
+Object.freeze(obj)
