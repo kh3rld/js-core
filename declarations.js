@@ -1,4 +1,4 @@
-let escapeStr = "`, \, /, \"'"
+let escapeStr = "`, \, /, \",'"
 let arr = [4, '2']
 let obj = {
     str: 'value',
