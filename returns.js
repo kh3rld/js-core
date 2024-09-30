@@ -1,2 +1,6 @@
-id = (arg) => arg
-getLength = function (arr = ["string"]) { return String.length(arr) }
+let arg = 9
+const id = (arg) => arg
+console.log(id(arg))
+function getLength (arr = ["string"]) { 
+    return arr.length
+}
