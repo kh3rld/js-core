@@ -1,14 +1,13 @@
-function first(arr = ["hey", "Hello"]) {
+let arr = ["hello", "World", "I", "am", "Here"]
+function first(arr) {
     return arr[0]
 }
-console.log(first())
-function last(arr = ["Hello", "Kherld"]) {
-    return arr[arr.length-1]
+console.log(first(arr))
+function last(arr) {
+    return arr[arr.length - 1]
 }
-console.log(last())
-const kis = []
-function kiss(arr = ["hello", "World", "I", "am", "Here"]) {
-    return kis.push(arr[0], arr[arr.length-1]);
+console.log(last(arr))
+function kiss(arr) {
+    return [arr[arr.length - 1], arr[0]];
 }
-kiss()
-console.log(kis)
+console.log(kiss(arr))
