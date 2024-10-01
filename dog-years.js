@@ -10,8 +10,8 @@ const planet = {
 }
 
 function dogYears(name, age) {
-    ageSec = 31557600
-    ageYrs = age / ageSec
+    let ageSec = 31557600
+    let ageYrs = age / ageSec
     if (planet[name]) {
         let planetYrs = ageYrs / planet[name]
         let dogYrs = planetYrs * 7;
