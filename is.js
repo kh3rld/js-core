@@ -32,15 +32,14 @@ function falsy(value) {
     return !value;
 }
 
-
-console.log(is.num(10));
-console.log(is.nan(NaN));
-console.log(is.str('ciao'));
-console.log(is.bool(true));
-console.log(is.undef(undefined));
-console.log(is.def(null));
-console.log(is.arr([1, 2, 3]));
-console.log(is.obj({}));
-console.log(is.fun(function () { }));
-console.log(is.truthy(1));
-console.log(is.falsy(0)); 
+// console.log(is.num(10));
+// console.log(is.nan(NaN));
+// console.log(is.str('ciao'));
+// console.log(is.bool(true));
+// console.log(is.undef(undefined));
+// console.log(is.def(null));
+// console.log(is.arr([1, 2, 3]));
+// console.log(is.obj({}));
+// console.log(is.fun(function () { }));
+// console.log(is.truthy(1));
+// console.log(is.falsy(0)); 
