@@ -1,2 +1,4 @@
-function concatStr(a, b) { String(a) + String(b) }
+function concatStr(a, b) {
+    return String(a) + String(b)
+}
 console.log(concatStr(3, 4))
