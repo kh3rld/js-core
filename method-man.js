@@ -4,7 +4,7 @@ function words(str) {
     return str.split(' ')
 }
 function sentence(arr) {
-    s = arr.join(' ')
+    let s = arr.join(' ')
     return s
 }
 function yell(str) {
