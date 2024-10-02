@@ -131,6 +131,7 @@ function superTypeOf(value) {
     if (Array.isArray(value)) return 'Array';
     if (value instanceof Set) return 'Set';
     if (value instanceof Map) return 'Map';
+    if (typeof value === 'string') return 'string';
     return typeof value === 'object' ? 'Object' : typeof value;
 }
 
