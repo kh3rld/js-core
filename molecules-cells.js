@@ -29,6 +29,7 @@ function RNA(str) {
       s += "U";
     }
   }
+  return s;
 }
 
 function DNA(str) {
@@ -44,4 +45,5 @@ function DNA(str) {
       s += "T";
     }
   }
+  return s
 }
