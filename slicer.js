@@ -19,7 +19,7 @@ function slice(arr, s, e) {
         s = Math.min(arr.length, s);
     }
     if (e === undefined) {
-        e = str.length;
+        e = arr.length;
     } else if (e < 0) {
         e = Math.max(0, arr.length + e);
     } else {
