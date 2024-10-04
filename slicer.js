@@ -12,28 +12,26 @@ It takes 3 arguments:
  */
 Array.prototype.slice = undefined
 String.prototype.slice = undefined
-
-function slice(str, s, e) {
-
+function slice(arr, s, e) {
     if (s < 0) {
-        s = Math.max(0, str.length + s);
+        s = Math.max(0, arr.length + s);
     } else {
-        s = Math.min(str.length, s);
+        s = Math.min(arr.length, s);
     }
     if (e === undefined) {
         e = str.length;
     } else if (e < 0) {
-        e = Math.max(0, str.length + e);
+        e = Math.max(0, arr.length + e);
     } else {
-        e = Math.min(str.length, e);
+        e = Math.min(arr.length, e);
     }
     let r;
-    if (typeof str === 'string') {
+    if (typeof arr === 'string') {
         r = '';
         for (let i = s; i < e; i++) {
-            r += str[i];
+            r += arr[i];
         }
-    } else if (Array.isArray(str)) {
+    } else if (Array.isArray(arr)) {
         r = [];
         for (let i = s; i < e; i++) {
             r.push(arr[i]);
@@ -41,7 +39,7 @@ function slice(str, s, e) {
     } else {
         throw new TypeError("Invalid Input")
     }
-    return r
+    return r;
 }
 const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
 const arr = "Kherld"
