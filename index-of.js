@@ -9,8 +9,7 @@ Create 3 functions which accept an array to be searched, and a value to be match
 
     Of course you must not use any of Array.indexOf(), Array.lastIndexOf() or Array.includes().
  */
-function indexOf(arr, val) {
-    let idx = 0;
+function indexOf(arr, val,idx = 0) {
     if (idx < 0) {
         idx = arr.length + idx;
     }
@@ -23,8 +22,7 @@ function indexOf(arr, val) {
     return -1; 
 }
 
-function lastIndexOf(arr, val) {
-    let idx = arr.length - 1
+function lastIndexOf(arr, val, idx = arr.length - 1) {
     if (idx >= arr.length) {
         idx = arr.length - 1;
     }
