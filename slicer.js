@@ -39,7 +39,3 @@ function slice(str, s, e) {
     }
     return r
 }
-
-const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
-console.log(slice(animals, -2));
-console.log(slice('abcdef', 2))
