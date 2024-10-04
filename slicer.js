@@ -1,3 +1,16 @@
+/*
+Instructions
+
+Create a function named slice that works like Array.slice() and String.slice().
+
+It takes 3 arguments:
+
+    string or array to process.
+    starting index.
+    optional ending index.
+
+ */
+
 function slice(str, s, e) {
     if (s < 0) {
         s = Math.max(0, (str.length + s))
