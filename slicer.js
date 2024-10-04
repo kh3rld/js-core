@@ -24,7 +24,7 @@ function slice(str, s, e) {
     } else {
         e = Math.min(str.length, s)
     }
-    let r = "";
+    let r;
     if (typeof str === 'string') {
         r = ""
         for (let i = s; i < e; i++) {
