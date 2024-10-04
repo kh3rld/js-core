@@ -25,7 +25,7 @@ function slice(str, s, e) {
         e = Math.min(str.length, s)
     }
     let r = "";
-    if (str === 'string') {
+    if (typeof str === 'string') {
         r = ""
         for (let i = s; i < e; i++) {
             r += str[i];
@@ -42,3 +42,4 @@ function slice(str, s, e) {
 
 const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
 console.log(slice(animals, -2));
+console.log(slice('abcdef', 2))
