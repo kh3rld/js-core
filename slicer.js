@@ -12,7 +12,7 @@ function slice(str, s, e) {
         e = Math.min(str.length, s)
     }
     let r = "";
-    if (typeof str === "string") {
+    if (str === 'string') {
         r = ""
         for (let i = s; i < e; i++) {
             r += str[i];
