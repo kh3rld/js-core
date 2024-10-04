@@ -31,3 +31,19 @@ function RNA(str) {
   }
   returns;
 }
+
+function DNA(str) {
+  let s = "";
+  for (let i = 0; i <= str.length - 1; i++) {
+    if (str[i] === "G") {
+      s += "C";
+    } else if (str[i] === "C") {
+      s += "G";
+    } else if (str[i] === "U") {
+      s += "A";
+    } else if (str[i] === "A") {
+      s += "T";
+    }
+  }
+  returns;
+}
