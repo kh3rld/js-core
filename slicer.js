@@ -13,7 +13,7 @@ It takes 3 arguments:
 
 function slice(str, s, e) {
     if (s < 0) {
-        s = Math.max(0, (str.length + s))
+        s = Math.max(0, str.length + s)
     } else {
         s = Math.min(str.length, s)
     }
@@ -21,7 +21,7 @@ function slice(str, s, e) {
         e = str.length
     } else if (e < 0) {
         e = Math.max(0, (str.length + e))
-    } else if (e > 0) {
+    } else {
         e = Math.min(str.length, s)
     }
     let r = "";
@@ -30,12 +30,13 @@ function slice(str, s, e) {
         for (let i = s; i < e; i++) {
             r += str[i];
         }
-    }
-    if (Array.isArray(str)) {
+    } else if (Array.isArray(str)) {
         r = []
         for (let i = s; i < e; i++) {
             r.push(str[i]);
         }
+    } else {
+        throw new TypeError("Invalid Input")
     }
     return r
 }
