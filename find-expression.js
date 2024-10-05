@@ -10,45 +10,31 @@ Create a function named findExpression that takes a number as parameter and retu
 For example, for the number 8, you must first multiply by 2 twice, and then add 4. Your function should return something like: 1 *2 *2 +4.
  */
 
-const add4 = (n) => n + 4;
-const mul2 = (n) => n * 2;
-
 function findExpression(target) {
-    const queue = [{ value: 1, expression: '1' }];
-    const visited = new Set();
+  const queue = [{ value: 1, expression: "1" }];
+  const visited = new Set();
 
-    while (queue.length > 0) {
-        const { value, expression } = queue.shift();
+  while (queue.length > 0) {
+    const { value, expression } = queue.shift();
 
-        // Check if we've reached the target
-        if (value === target) {
-            return expression;
-        }
-
-        // Prevent re-processing the same value
-        if (visited.has(value)) {
-            continue;
-        }
-        visited.add(value);
-
-        // Perform the operations and enqueue the results
-        const newValue1 = add4(value);
-        const newValue2 = mul2(value);
-
-        if (newValue1 <= target + 4) { // Adding a guard to avoid excessive operations
-            queue.push({ value: newValue1, expression: expression + ' +4' });
-        }
-        if (newValue2 <= target * 2) { // Adding a guard to avoid excessive operations
-            queue.push({ value: newValue2, expression: expression + ' *2' });
-        }
+    if (value === target) {
+      return expression;
     }
+    if (visited.has(value)) {
+      continue;
+    }
+    visited.add(value);
 
-    return undefined; // If the target cannot be reached
+    const newValue1 = add4(value);
+    const newValue2 = mul2(value);
+
+    if (newValue1 <= target + 4) {
+      queue.push({ value: newValue1, expression: expression + " +4" });
+    }
+    if (newValue2 <= target * 2) {
+      queue.push({ value: newValue2, expression: expression + " *2" });
+    }
+  }
+
+  return undefined;
 }
-
-// Example usage:
-console.log(findExpression(8));  // Output: "1 *2 *2 +4"
-console.log(findExpression(1));  // Output: "1"
-console.log(findExpression(5));  // Output: "1 +4"
-console.log(findExpression(20)); // Output: "1 *2 *2 *2 +4"
-console.log(findExpression(15)); // Output: undefined
