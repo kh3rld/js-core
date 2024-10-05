@@ -1,16 +1,16 @@
 function sameAmount(str, reg1, reg2) {
-  let count1 = 0;
-  let count2 = 0;
+  const countMatches = (regex) => {
+    let count = 0;
+    let match;
+    regex.lastIndex = 0;
+    while ((match = regex.exec(str)) !== null) {
+      count++;
+    }
+    return count;
+  };
 
-  let match1;
-  while ((match1 = reg1.exec(str)) !== null) {
-    count1++;
-  }
-
-  let match2;
-  while ((match2 = reg2.exec(str)) !== null) {
-    count2++;
-  }
+  const count1 = countMatches(reg1);
+  const count2 = countMatches(reg2);
 
   return count1 === count2;
 }
