@@ -4,8 +4,8 @@ Create a function named vowelDots that receives a string. Your function should r
 Your RegEx should be stored in a variable named vowels.
     a, e, i, o and u are considered as vowels here.
  */
+let vowels = /[aeiou]/gi;
 function vowelDots(str) {
-  const vowels = /[aeiou]/gi;
   const s = str.replace(vowels, (match) => `${match}.`);
   return s;
 }
