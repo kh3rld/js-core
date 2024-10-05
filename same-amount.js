@@ -1,14 +1,16 @@
 function sameAmount(str, reg1, reg2) {
-  const matches1 = str.match(reg1);
-  const matches2 = str.match(reg2);
-  const count1 = matches1 ? matches1.length : 0;
-  const count2 = matches2 ? matches2.length : 0;
+  let count1 = 0;
+  let count2 = 0;
+
+  let match1;
+  while ((match1 = reg1.exec(str)) !== null) {
+    count1++;
+  }
+
+  let match2;
+  while ((match2 = reg2.exec(str)) !== null) {
+    count2++;
+  }
+
   return count1 === count2;
 }
-
-const str = "hello world, hello universe!";
-const regexA = /hello/g;
-const regexB = /o/g;
-
-console.log(sameAmount(str, regexA, regexB));
-console.log(sameAmount("q qqqqqqq", /q /g, /qqqqqqq/g));
