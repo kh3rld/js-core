@@ -16,15 +16,3 @@ function notSoGreedy(str) {
     return queryParams.length >= 2 && queryParams.length <= 3;
   });
 }
-
-const str = `
-    qqq http:// qqqq 
-    qqqqq https://something.com/hello 
-    qqqqqqq qhttp://example.com/hello?you=something&something=you 
-    qhttp://example.com/hello?param1=value1&param2=value2&param3=value3 
-    http://example.com/path?paramA=valueA&paramB=valueB
-`;
-
-console.log(getURL(str));
-console.log(greedyQuery(str));
-console.log(notSoGreedy(str));
