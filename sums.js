@@ -1,4 +1,8 @@
 function sums(n) {
+  if (n === 0) {
+    return [];
+  }
+
   const result = [];
 
   function findPartitions(target, start, current) {
