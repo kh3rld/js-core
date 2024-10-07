@@ -5,15 +5,14 @@ function firstDayWeek(week, year) {
 
   const startOfYear = new Date(year, 0, 1);
   const dayOfWeek = startOfYear.getDay();
-  let offset = 1 - dayOfWeek;
-
+  let firstMonday;
   if (dayOfWeek === 0) {
-    offset = 1;
+    firstMonday = new Date(startOfYear);
+    firstMonday.setDate(startOfYear.getDate() + 1);
+  } else {
+    firstMonday = new Date(startOfYear);
+    firstMonday.setDate(startOfYear.getDate() + ((1 - dayOfWeek + 7) % 7));
   }
-
-  const firstMonday = new Date(startOfYear);
-  firstMonday.setDate(startOfYear.getDate() + offset);
-
   const firstDayOfSpecifiedWeek = new Date(firstMonday);
   firstDayOfSpecifiedWeek.setDate(firstMonday.getDate() + (week - 1) * 7);
 
