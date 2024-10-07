@@ -22,3 +22,11 @@ function addWeek(date) {
 
   return days[diffInDays % 14];
 }
+
+function timeTravel({ date, hour, minute, second }) {
+  const newDate = new Date(date);
+  newDate.setHours(hour);
+  newDate.setMinutes(minute);
+  newDate.setSeconds(second);
+  return newDate;
+}
