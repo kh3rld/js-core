@@ -30,3 +30,18 @@ function timeTravel({ date, hour, minute, second }) {
   newDate.setSeconds(second);
   return newDate;
 }
+
+console.log(addWeek(new Date("0001-01-01")));
+console.log(addWeek(new Date("0001-01-02")));
+console.log(addWeek(new Date("0001-01-07")));
+console.log(addWeek(new Date("0001-01-08")));
+console.log(addWeek(new Date("0001-01-09")));
+
+const modifiedDate = timeTravel({
+  date: new Date("2020-05-29 23:25:22"),
+  hour: 21,
+  minute: 22,
+  second: 22,
+});
+
+console.log(modifiedDate.toString());
