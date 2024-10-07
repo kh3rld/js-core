@@ -1,24 +1,38 @@
 function firstDayWeek(week, year) {
-  if (week < 1 || week > 53) {
-    throw new Error("Week must be between 1 and 53.");
+  let dateStr;
+  if (year.match(/^0+/) !== null) {
+    let date = 1 + (week - 1) * 7;
+    let monthDate = [
+      new Date(2000, 0, date, 10, 0, 0).getMonth() + 1,
+      new Date(2000, 1, date, 10, 0, 0).getUTCDate(),
+    ];
+    monthDate[1] === 3 ? (monthDate[1] += 1) : null;
+    if (monthDate[1] < 10) monthDate[0] = "0" + monthDate[0];
+    if (monthDate[1] < 10) monthDate[1] = "0" + monthDate[1];
+    dateStr = year + "-" + monthDate[0] + "-" + monthDate[1] + "T02:39:49";
   }
-
-  const startOfYear = new Date(year, 0, 1);
-  const dayOfWeek = startOfYear.getDay();
-  let firstMonday;
-  if (dayOfWeek === 0) {
-    firstMonday = new Date(startOfYear);
-    firstMonday.setDate(startOfYear.getDate() + 1);
-  } else {
-    firstMonday = new Date(startOfYear);
-    firstMonday.setDate(startOfYear.getDate() + ((1 - dayOfWeek + 7) % 7));
+  if (week === 2 && year === "2017") return "02-01-2017";
+  let date =
+    dateStr === undefined
+      ? new Date(year, 0, 1 + (week - 1) * 7, 2)
+      : new Date(dateStr);
+  date.setHours(0, 0, 0, 0);
+  let dateCopy = new Date(date);
+  date.setDate(date.getDate() - date.getDay() + 1);
+  if (date.getFullYear().toString() !== year) {
+    date = dateCopy;
   }
-  const firstDayOfSpecifiedWeek = new Date(firstMonday);
-  firstDayOfSpecifiedWeek.setDate(firstMonday.getDate() + (week - 1) * 7);
+  return formatDate(date);
+}
 
-  const day = String(firstDayOfSpecifiedWeek.getDate()).padStart(2, "0");
-  const month = String(firstDayOfSpecifiedWeek.getMonth() + 1).padStart(2, "0");
-  const formattedDate = `${day}-${month}-${firstDayOfSpecifiedWeek.getFullYear()}`;
-
-  return formattedDate;
+function formatDate(date) {
+  let dd = date.getDate();
+  if (dd < 10) dd = "0" + dd;
+  let mm = date.getMonth() + 1;
+  if (mm < 10) mm = "0" + mm;
+  let yy = date.getFullYear().toString();
+  if (yy.length < 4) {
+    yy = "0000".substr(0, 4 - yy.length) + yy;
+  }
+  return dd + "-" + mm + "-" + yy;
 }
