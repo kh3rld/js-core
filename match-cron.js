@@ -1,18 +1,34 @@
 function matchCron(cronString, date) {
-  const [minutePattern, hourPattern] = cronString.split(" ");
-  const minute = date.getMinutes();
-  const hour = date.getHours();
-
-  const matchesPattern = (pattern, value) => {
-    if (pattern === "*") {
-      return true;
+  let cronParts = Array.isArray(cronString)
+    ? cronString
+    : cronString.split(" ");
+  for (let i = 0; i < cronParts.length; i++) {
+    if (i === 0) {
+      let mins = date.getMinutes();
+      if (cronParts[i] !== "*" && mins !== parseInt(cronParts[i])) {
+        return false;
+      }
+    } else if (i === 1) {
+      let hours = date.getHours();
+      if (cronParts[i] !== "*" && hours !== parseInt(cronParts[i])) {
+        return false;
+      }
+    } else if (i === 2) {
+      let dayOfMonth = date.getDate();
+      if (cronParts[i] !== "*" && dayOfMonth !== parseInt(cronParts[i])) {
+        return false;
+      }
+    } else if (i === 3) {
+      let month = date.getMonth() + 1;
+      if (cronParts[i] !== "*" && month !== parseInt(cronParts[i])) {
+        return false;
+      }
+    } else if (i === 4) {
+      let dayOfWeek = date.getDay();
+      if (cronParts[i] !== "*" && dayOfWeek !== parseInt(cronParts[i])) {
+        return false;
+      }
     }
-    const numPattern = parseInt(pattern, 10);
-    return value === numPattern; 
-  };
-
-  const minuteMatches = matchesPattern(minutePattern, minute);
-  const hourMatches = matchesPattern(hourPattern, hour);
-
-  return minuteMatches && hourMatches;
+  }
+  return true;
 }
