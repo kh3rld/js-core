@@ -24,3 +24,5 @@ function firstDayWeek(week, year) {
   return formattedDate;
 }
 
+console.log(firstDayWeek(1, "1000"));
+console.log(firstDayWeek(2, "2024"));
