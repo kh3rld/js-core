@@ -11,12 +11,15 @@ function filterStartVowel(arr) {
 }
 
 // Filter 5 Vowels
-const filter5Vowels = (arr) => {
-  return arr.filter((state) => {
-    const vowelCount = (state.match(/[aeiou]/gi) || []).length;
-    return vowelCount >= 5;
-  });
-};
+function filter5Vowels(arr) {
+  return arr.filter(
+    (name) =>
+      name
+        .toLowerCase()
+        .split("")
+        .filter((char) => ["a", "e", "i", "o", "u"].includes(char)).length >= 5
+  );
+}
 
 // Filter 1 Distinct Vowel
 const filter1DistinctVowel = (arr) => {
