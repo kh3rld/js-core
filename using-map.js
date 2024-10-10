@@ -1,7 +1,8 @@
 // Cities Only
-const citiesOnly = (arr) => {
-  return arr.map((obj) => obj.city.trim());
-};
+function citiesOnly(arr) {
+  const city = arr.map((obj) => obj.city);
+  return city;
+}
 
 // Upper Casing States
 const upperCasingStates = (arr) => {
@@ -40,18 +41,18 @@ const tempForecasts = (arr) => {
 //     { city: "Los Angeles", temperature: "  101 °F   " },
 //     { city: "San Francisco", temperature: " 84 ° F   " },
 //   ])
-// ); 
+// );
 
-// console.log(upperCasingStates(["alabama", "new jersey"])); 
+// console.log(upperCasingStates(["alabama", "new jersey"]));
 
-// console.log(fahrenheitToCelsius(["68°F", "59°F", "25°F"])); 
+// console.log(fahrenheitToCelsius(["68°F", "59°F", "25°F"]));
 
 // console.log(
 //   trimTemp([
 //     { city: "Los Angeles", temperature: "  101 °F   " },
 //     { city: "San Francisco", temperature: " 84 ° F   " },
 //   ])
-// ); 
+// );
 
 // console.log(
 //   tempForecasts([
