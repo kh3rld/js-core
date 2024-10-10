@@ -22,13 +22,21 @@ function filter5Vowels(arr) {
 }
 
 // Filter 1 Distinct Vowel
-const filter1DistinctVowel = (arr) => {
-  return arr.filter((state) => {
-    const distinctVowels = new Set(state.match(/[aeiou]/gi));
-    return distinctVowels.size === 1;
-  });
-};
+function filter1DistinctVowel(arr) {
+  const vowels = "aeiou";
 
+  function hasOneDistinctVowel(str) {
+    const uniqueVowel = new Set();
+
+    for (const char of str.toLowerCase()) {
+      if (vowels.includes(char)) {
+        uniqueVowel.add(char);
+      }
+    }
+    return uniqueVowel.size === 1;
+  }
+  return arr.filter(hasOneDistinctVowel);
+}
 // Multi Filter
 const multiFilter = (arr) => {
   return arr.filter(
