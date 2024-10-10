@@ -1,7 +1,7 @@
 // Filter Short State Name
-const filterShortStateName = (arr) => {
-  return arr.filter((state) => state.length < 7);
-};
+function filterShortStateName(arr) {
+  return arr.filter((name) => name.length < 7);
+}
 
 // Filter Start Vowel
 const filterStartVowel = (arr) => {
