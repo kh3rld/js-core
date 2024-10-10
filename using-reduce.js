@@ -6,11 +6,13 @@ function adder(arr, additional = 0) {
 }
 
 // Sum or Multiply
-const sumOrMul = (arr, initialValue) => {
-  return arr.reduce((acc, num) => {
-    return num % 2 === 0 ? acc * num : acc + num;
-  }, initialValue);
-};
+function sumOrMul(arr, additional = 0) {
+  const initialVal = additional !== 0 ? additional : arr[0] % 2 === 0 ? 1 : 0;
+  const sumOrMult = arr.reduce((acc, current) => {
+    return current % 2 === 0 ? acc * current : acc + current;
+  }, initialVal);
+  return sumOrMult;
+}
 
 // Func Exec
 const funcExec = (arr, initialValue) => {
