@@ -22,13 +22,14 @@ function cap(str) {
 }
 
 // Fahrenheit to Celsius
-const fahrenheitToCelsius = (arr) => {
-  return arr.map((temp) => {
-    const fahrenheit = parseFloat(temp);
-    const celsius = Math.floor((fahrenheit - 32) * (5 / 9));
-    return `${celsius}°C`;
-  });
-};
+function fahrenheitToCelsiusFormula(num) {
+  return String(Math.floor((num - 32) * (5 / 9))) + "°C";
+}
+
+function fahrenheitToCelsius(arr) {
+  const celcuis = arr.map((temp) => fahrenheitToCelsiusFormula(parseInt(temp)));
+  return celcuis;
+}
 
 // Trim Temp
 const trimTemp = (arr) => {
