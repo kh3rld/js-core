@@ -37,13 +37,27 @@ function filter1DistinctVowel(arr) {
   }
   return arr.filter(hasOneDistinctVowel);
 }
+
 // Multi Filter
-const multiFilter = (arr) => {
-  return arr.filter(
-    (obj) =>
+function multiFilter(arr) {
+  function startWithVowel(str) {
+    return /^[aeiou]/i.test(str);
+  }
+
+  function hasVowel(str) {
+    return /[aeiou]/i.test(str);
+  }
+
+  return arr.filter((obj) => {
+    return (
+      obj.capital &&
       obj.capital.length >= 8 &&
-      !/^[aeiou]/i.test(obj.name) &&
-      /[aeiou]/i.test(obj.tag) &&
+      obj.name &&
+      !startWithVowel(obj.name) &&
+      obj.tag &&
+      hasVowel(obj.tag) &&
+      obj.region &&
       obj.region !== "South"
-  );
-};
+    );
+  });
+}
