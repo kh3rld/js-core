@@ -1,3 +1,14 @@
+/*
+Instructions
+
+Create the following functions, which each take an array as the first argument, and a function as the second argument.
+
+    filter: that works like the [].filter method.
+
+    reject: that works like the reject function from lodash.
+
+    partition: that works like the partition function from lodash.
+ */
 // Custom filter function
 const filter = (arr, callback) => {
   const result = [];
