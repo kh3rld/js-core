@@ -13,7 +13,7 @@ function upperCasingStates(arr) {
 function capWords(str) {
   return str
     .split(" ")
-    .map((word) => capitalize(word))
+    .map((word) => cap(word))
     .join(" ");
 }
 
@@ -22,22 +22,25 @@ function cap(str) {
 }
 
 // Fahrenheit to Celsius
-function fahrenheitToCelsiusFormula(num) {
+function formula(num) {
   return String(Math.floor((num - 32) * (5 / 9))) + "°C";
 }
 
 function fahrenheitToCelsius(arr) {
-  const celcuis = arr.map((temp) => fahrenheitToCelsiusFormula(parseInt(temp)));
+  const celcuis = arr.map((temp) => formula(parseInt(temp)));
   return celcuis;
 }
 
 // Trim Temp
-const trimTemp = (arr) => {
-  return arr.map((obj) => ({
-    city: obj.city,
-    temperature: obj.temperature.replace(/\s+/g, ""),
-  }));
-};
+function trimTemp(arr) {
+  return arr.map((obj) => {
+    const trimmedTemp = obj.temperature.replace(/\s+/g, "");
+    return {
+      ...obj,
+      temperature: trimmedTemp,
+    };
+  });
+}
 
 // Temp Forecasts
 const tempForecasts = (arr) => {
