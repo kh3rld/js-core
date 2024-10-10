@@ -4,9 +4,11 @@ function filterShortStateName(arr) {
 }
 
 // Filter Start Vowel
-const filterStartVowel = (arr) => {
-  return arr.filter((state) => /^[aeiou]/i.test(state));
-};
+function filterStartVowel(arr) {
+  return arr.filter((name) =>
+    ["a", "e", "i", "o", "u"].includes(name[0].toLowerCase())
+  );
+}
 
 // Filter 5 Vowels
 const filter5Vowels = (arr) => {
