@@ -15,14 +15,15 @@ function sumOrMul(arr, additional = 0) {
 }
 
 // Func Exec
-const funcExec = (arr, initialValue) => {
-  return arr.reduce((acc, func) => func(acc), initialValue);
-};
+function funcExec(arr, initialVal = 0) {
+  const result = arr.reduce((acc, func) => func(acc), initialVal);
+  return result;
+}
 
-console.log(adder([1, 2, 3, 4]));
+// console.log(adder([1, 2, 3, 4]));
 
-console.log(sumOrMul([1, 2, 3, 5, 8], 5));
+// console.log(sumOrMul([1, 2, 3, 5, 8], 5));
 
-const functions = [(x) => x + 2, (x) => x * 3, (x) => x - 1];
+// const functions = [(x) => x + 2, (x) => x * 3, (x) => x - 1];
 
-console.log(funcExec(functions, 5));
+// console.log(funcExec(functions, 5));
