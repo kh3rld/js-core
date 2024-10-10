@@ -58,9 +58,9 @@ const reduceRight = (arr, fn) => {
   return acc;
 };
 
-const adder = (a, b) => a + b;
+// const adder = (a, b) => a + b;
 
-console.log(fold([1, 2, 3], adder, 2));
-console.log(foldRight([1, 2, 3], adder, 2));
-console.log(reduce([1, 2, 3], adder));
-console.log(reduceRight([1, 2, 3], adder));
+// console.log(fold([1, 2, 3], adder, 2));
+// console.log(foldRight([1, 2, 3], adder, 2));
+// console.log(reduce([1, 2, 3], adder));
+// console.log(reduceRight([1, 2, 3], adder));
