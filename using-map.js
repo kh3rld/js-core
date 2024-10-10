@@ -5,9 +5,14 @@ function citiesOnly(arr) {
 }
 
 // Upper Casing States
-const upperCasingStates = (arr) => {
-  return arr.map((state) => state.charAt(0).toUpperCase() + state.slice(1));
-};
+function upperCasingStates(arr) {
+  let upp = arr.map((state) => capWords(state));
+  return upp;
+}
+
+function cap(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
 
 // Fahrenheit to Celsius
 const fahrenheitToCelsius = (arr) => {
