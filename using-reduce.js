@@ -1,7 +1,9 @@
 // Adder
-const adder = (arr) => {
-  return arr.reduce((sum, num) => sum + num, 0);
-};
+function adder(arr, additional = 0) {
+  const initialVal = additional;
+  const sum = arr.reduce((acc, current) => acc + current, initialVal);
+  return sum;
+}
 
 // Sum or Multiply
 const sumOrMul = (arr, initialValue) => {
