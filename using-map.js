@@ -10,6 +10,13 @@ function upperCasingStates(arr) {
   return upp;
 }
 
+function capWords(str) {
+  return str
+    .split(" ")
+    .map((word) => capitalize(word))
+    .join(" ");
+}
+
 function cap(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
