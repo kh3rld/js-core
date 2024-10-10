@@ -43,14 +43,15 @@ function trimTemp(arr) {
 }
 
 // Temp Forecasts
-const tempForecasts = (arr) => {
-  return arr.map((obj) => {
-    const celsius = Math.floor((parseFloat(obj.temperature) - 32) * (5 / 9));
-    return `${celsius}°Celsius in ${obj.city}, ${
-      obj.state.charAt(0).toUpperCase() + obj.state.slice(1)
-    }`;
+function tempForecasts(arr) {
+  const cities = citiesOnly(arr);
+  const states = upperCasingStates(arr.map((obj) => obj.state));
+  return arr.map((obj, index) => {
+    const trimmedTemp = obj.temperature.replace(/\s+g/, "");
+    const tempInCelsius = formula(parseInt(trimmedTemp));
+    return `${tempInCelsius}elsius in ${cities[index]}, ${states[index]}`;
   });
-};
+}
 
 // console.log(
 //   citiesOnly([
