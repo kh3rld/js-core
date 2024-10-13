@@ -42,3 +42,24 @@ You only need to create & submit the JS file pimp-my-style.js. We're providing y
 
     feel free to use the CSS file pimp-my-style.data.css as it is or you can also modify it.
  */
+// Import the styles array from the provided data file
+import { styles } from "./pimp-my-style.data.js";
+let count = 0;
+
+export function pimp() {
+  const button = document.querySelector(".button");
+  if (!button.classList.contains("unpimp")) {
+    button.classList.add(styles[count]);
+    count++;
+
+    if (count === styles.length) {
+      button.classList.add("unpimp");
+    }
+  } else {
+    count--;
+    button.classList.remove(styles[count]);
+    if (count === 0) {
+      button.classList.toggle("unpimp");
+    }
+  }
+}
