@@ -9,6 +9,6 @@ function invert(obj) {
   return inverted;
 }
 
-const original = { "Kherld": 1, "Nerd": 2, "Me": 3 };
-const inverted = invert(original);
-console.log(inverted);
+// const original = { "Kherld": 1, "Nerd": 2, "Me": 3 };
+// const inverted = invert(original);
+// console.log(inverted);
