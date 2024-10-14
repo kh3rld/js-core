@@ -1,3 +1,9 @@
+/*
+Instructions
+
+Create a function named invert which takes an object and returns a new one with its keys and values inverted.
+ */
+
 function invert(obj) {
   const inverted = {};
   for (const key in obj) {
