@@ -38,3 +38,22 @@ duration = 10
    0  0.2 0.4 0.6 0.8
 
  */
+
+function interpolation({ step, start, end, callback, duration }) {
+  const interval = duration / step;
+  const distance = (end - start) / step;
+  let currentStep = 0;
+
+  function interpolateStep() {
+    if (currentStep < step) {
+      const x = start + distance * currentStep;
+      const y = interval * (currentStep + 1);
+      callback([x, y]);
+
+      currentStep++;
+      setTimeout(interpolateStep, interval); // Schedule next step
+    }
+  }
+
+  setTimeout(interpolateStep, interval);
+}
