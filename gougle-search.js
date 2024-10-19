@@ -30,3 +30,15 @@ Code provided
 let getJSON = async (url) => url
 
  */
+
+async function queryServers(serverName, q) {
+  const queryString = new URLSearchParams({ q }).toString();
+
+  const urls = [
+    getJSON(`/${serverName}?${queryString}`),
+    getJSON(`/${serverName}_backup?${queryString}`),
+  ];
+
+  // Use Promise.race to return the fastest result
+  return Promise.race(urls);
+}
