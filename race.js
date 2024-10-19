@@ -23,7 +23,7 @@ async function some(promises, count) {
   const results = [];
   let completed = 0;
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     for (const promise of promises) {
       Promise.resolve(promise)
         .then((value) => {
@@ -33,7 +33,9 @@ async function some(promises, count) {
             resolve(results); // Resolve when we have the required count
           }
         })
-        .catch(reject); // Reject if any promise fails
+        .catch(() => {
+          // Ignore errors from individual promises
+        });
     }
   });
 }
