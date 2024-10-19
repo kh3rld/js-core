@@ -35,3 +35,23 @@ function retry(count, callback) {
     }
   };
 }
+
+function timeout(delay, callback) {
+  return function (...args) {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject(new Error("timeout"));
+      }, delay);
+
+      Promise.resolve(callback(...args))
+        .then((result) => {
+          clearTimeout(timer);
+          resolve(result);
+        })
+        .catch((error) => {
+          clearTimeout(timer);
+          reject(error);
+        });
+    });
+  };
+}
