@@ -76,3 +76,33 @@ const db = (() => {
 })()
 
 */
+
+async function isWinner(countryName) {
+  try {
+    const country = await db.getWinner(countryName);
+
+    // Check continent
+    if (country.continent !== "Europe") {
+      return `${country.name} is not what we are looking for because of the continent`;
+    }
+
+    // Get results for the country
+    const results = await db.getResults(country.id);
+
+    // Check the number of wins
+    if (results.length < 3) {
+      return `${country.name} is not what we are looking for because of the number of times it was champion`;
+    }
+
+    // Construct the response with years and results
+    const years = results.map((result) => result.year).join(", ");
+    const scores = results.map((result) => result.score).join(", ");
+
+    return `${country.name} won the FIFA World Cup in ${years} winning by ${scores}`;
+  } catch (error) {
+    if (error.message === "Country Not Found") {
+      return `${countryName} never was a winner`;
+    }
+    throw error; // Re-throw other errors
+  }
+}
