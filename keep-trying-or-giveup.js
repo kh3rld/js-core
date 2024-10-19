@@ -20,38 +20,29 @@ Create function named timeout, that takes 2 arguments:
 timeout returns a function that invokes and returns the value from callback. The function must pass its arguments to callback. If callback does not resolve before delay, your function returns Error('timeout').
  */
 
+"use strict";
 function retry(count, callback) {
-  return async function (...args) {
-    let attempts = 0;
-    while (attempts <= count) {
-      try {
-        return await callback(...args);
-      } catch (error) {
-        attempts++;
-        if (attempts > count) {
-          throw new Error("Maximum retry attempts reached");
-        }
-      }
-    }
+  let attempts = 0;
+
+  return async function again(...args) {
+    return await callback(...args).catch((err) => {
+      if (attempts >= count) throw err;
+      attempts++;
+      return again(...args);
+    });
   };
 }
 
 function timeout(delay, callback) {
-  return function (...args) {
-    return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => {
-        reject(new Error("timeout"));
+  return async (...args) => {
+    const timer = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(new Error("timeout"));
       }, delay);
-
-      Promise.resolve(callback(...args))
-        .then((result) => {
-          clearTimeout(timer);
-          resolve(result);
-        })
-        .catch((error) => {
-          clearTimeout(timer);
-          reject(error);
-        });
+    });
+    return Promise.race([callback(...args), timer]).then((value) => {
+      if (Object.entries(value).length) return value;
+      throw value;
     });
   };
 }
