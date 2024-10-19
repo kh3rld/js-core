@@ -19,3 +19,19 @@ Create function named timeout, that takes 2 arguments:
 
 timeout returns a function that invokes and returns the value from callback. The function must pass its arguments to callback. If callback does not resolve before delay, your function returns Error('timeout').
  */
+
+function retry(count, callback) {
+  return async function (...args) {
+    let attempts = 0;
+    while (attempts <= count) {
+      try {
+        return await callback(...args);
+      } catch (error) {
+        attempts++;
+        if (attempts > count) {
+          throw new Error("Maximum retry attempts reached");
+        }
+      }
+    }
+  };
+}
