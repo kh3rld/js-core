@@ -19,3 +19,22 @@ The parsed object contains one of those 2 properties:
     "data": the actual data to return.
     "error": the error message to throw.
 */
+
+async function getJSON(path, params = {}) {
+  const queryString = new URLSearchParams(params).toString();
+  const url = queryString ? `${path}?${queryString}` : path;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  const data = await response.json();
+
+  if (data.error) {
+    throw new Error(data.error);
+  }
+
+  return data.data; // Return the actual data
+}
