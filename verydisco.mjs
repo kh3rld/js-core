@@ -1,25 +1,22 @@
 // Function to make a word "very disco"
-function makeVeryDisco(word) {
+function veryDisco(word) {
   const mid = Math.ceil(word.length / 2);
-  const firstHalf = word.slice(0, mid);
-  const secondHalf = word.slice(mid);
-  return secondHalf + firstHalf;
+  return word.slice(mid) + word.slice(0, mid);
 }
 
-// Main function to process the input
-function main() {
-  const args = process.argv.slice(2); // Get command line arguments
-  if (args.length === 0) {
-    console.log("Please provide a sentence as an argument.");
-    return;
-  }
-
-  const input = args.join(" ");
-  const words = input.split(" ");
-  const discoWords = words.map(makeVeryDisco);
-  const result = discoWords.join(" ");
-
-  console.log(result);
+// Function to process the entire input string
+function inputDisco(input) {
+  return input.split(" ").map(veryDisco).join(" ");
 }
 
-main();
+// Get the input from command line arguments
+const input = process.argv[2];
+
+if (!input || !input.trim()) {
+  console.log("Please provide a valid input string.");
+  process.exit(1);
+}
+
+// Process the input and output the result
+const result = inputDisco(input);
+console.log(result);
