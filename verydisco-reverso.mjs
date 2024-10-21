@@ -12,39 +12,37 @@ For example:
     Reading the verydisco content of your verydisco.txt file would print discovery in console.
 */
 
-#!/usr/bin/env node
-
-import fs from 'fs/promises';
+import fs from "fs/promises";
 
 // Function to reverse the "very disco" transformation
 function reverseDisco(word) {
-    const mid = Math.ceil(word.length / 2); // Changed to Math.ceil
-    return word.slice(mid) + word.slice(0, mid); 
+  const mid = Math.ceil(word.length / 2); // Changed to Math.ceil
+  return word.slice(mid) + word.slice(0, mid);
 }
 
 // Process input
-function inputReverso(input) { // Renamed for clarity
-    return input.split(' ').map(reverseDisco).join(' ');
+function inputReverso(input) {
+  // Renamed for clarity
+  return input.split(" ").map(reverseDisco).join(" ");
 }
 
 // Read file and process its content
 async function readFile(file) {
-    try {
-        const content = await fs.readFile(file, 'utf-8');
-        const reversed = inputReverso(content.trim());
-        console.log(reversed);
-    } catch (error) {
-        console.error(`Error reading file:`, error);
-        process.exit(1);
-    }
+  try {
+    const content = await fs.readFile(file, "utf-8");
+    const reversed = inputReverso(content.trim());
+    console.log(reversed);
+  } catch (error) {
+    console.error(`Error reading file:`, error);
+    process.exit(1);
+  }
 }
 
 // Get filename from command line arguments
 const file = process.argv[2];
 if (!file) {
-    console.error('Please provide a file name.'); // Fixed typo
-    process.exit(1);
+  console.error("Please provide a file name."); // Fixed typo
+  process.exit(1);
 }
 
 readFile(file);
-
