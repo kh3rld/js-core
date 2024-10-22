@@ -78,7 +78,7 @@ async function removeItem(filePath, args) {
   } else {
     list[itemName] -= quantity;
     if (list[itemName] <= 0) {
-      delete list[itemName];
+      delete list[itemName]; // Remove the item if the new value is 0 or less
       console.log(`Removed ${itemName}.`);
     } else {
       console.log(`Subtracted ${quantity} from ${itemName}.`);
