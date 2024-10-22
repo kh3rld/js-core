@@ -1,126 +1,124 @@
-import fs from "fs/promises";
-import path from "path";
+import fs from "fs";
 
-const [, , filePath, command, ...args] = process.argv;
+// Helper function to print the help message
+const printHelp = () => {
+  console.log("Commands:");
+  console.log(
+    "- create: takes a filename as argument and create it (should have `.json` extension specified)",
+  );
+  console.log("- delete: takes a filename as argument and delete it");
+  console.log(
+    "- add: takes a filename, adds an entry to the list with an optional quantity",
+  );
+  console.log(
+    "- rm: takes a filename, removes an entry from the list with an optional quantity",
+  );
+  console.log("- ls: lists all entries in the list");
+  console.log("- help: prints this help message");
+};
 
-async function main() {
-  try {
-    switch (command) {
-      case "create":
-        await createFile(filePath);
-        break;
-      case "delete":
-        await deleteFile(filePath);
-        break;
-      case "add":
-        await addItem(filePath, args);
-        break;
-      case "rm":
-        await removeItem(filePath, args);
-        break;
-      case "ls":
-      case undefined:
-        await listItems(filePath);
-        break;
-      case "help":
-        showHelp();
-        break;
-      default:
-        console.error('Invalid command. Use "help" for a list of commands.');
+// Function to read the shopping list
+const readList = (filename) => {
+  if (!fs.existsSync(filename)) return {};
+  const data = fs.readFileSync(filename);
+  return JSON.parse(data);
+};
+
+// Function to write the shopping list
+const writeList = (filename, list) => {
+  fs.writeFileSync(filename, JSON.stringify(list, null, 2));
+};
+
+// Command line arguments
+const [filename, command, ...args] = process.argv.slice(2);
+
+// Handle commands
+switch (command) {
+  case "create":
+    fs.writeFileSync(filename, JSON.stringify({}));
+    console.log(`Created file: ${filename}`);
+    break;
+
+  case "delete":
+    fs.unlinkSync(filename);
+    console.log(`Deleted file: ${filename}`);
+    break;
+
+  case "add": {
+    const entry = args[0]; // Get the item name from the arguments
+    const quantity = isNaN(args[1]) ? 1 : Number(args[1]); // Default quantity is 1 if not specified
+
+    if (!entry) {
+      console.error("No elem specified.."); // Log error if no item name is provided
+      break;
     }
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-}
 
-async function createFile(filePath) {
-  await fs.writeFile(filePath, JSON.stringify({}), "utf8");
-  console.log(`Created file: ${filePath}`);
-}
+    const list = readList(filename); // Read the current shopping list
+    list[entry] = (list[entry] || 0) + quantity; // Update the quantity for the item
 
-async function deleteFile(filePath) {
-  await fs.unlink(filePath);
-  console.log(`Deleted file: ${filePath}`);
-}
-
-async function addItem(filePath, args) {
-  if (!args[0]) {
-    console.error("No elem specified.");
-    return;
+    writeList(filename, list); // Write the updated list back to the file
+    console.log(`Added ${quantity} of "${entry}" to the list.`); // Confirm the addition
+    break;
   }
 
-  const itemName = args[0];
-  const quantity = parseInt(args[1]) || 1;
+  case "rm": {
+    const entry = args[0];
+    const quantity = isNaN(args[1]) ? null : Number(args[1]);
 
-  const list = await readList(filePath);
-  list[itemName] = (list[itemName] || 0) + quantity;
+    if (!entry) {
+      console.log("No elem specified..");
+      break;
+    }
 
-  await writeList(filePath, list);
-  console.log(`Added ${quantity} to ${itemName}.`);
-}
+    const list = readList(filename);
+    if (!list[entry]) break;
 
-async function removeItem(filePath, args) {
-  if (!args[0]) {
-    console.error("No elem specified.");
-    return;
-  }
-
-  const itemName = args[0];
-  const quantity = parseInt(args[1]);
-
-  const list = await readList(filePath);
-
-  if (!list[itemName]) return;
-
-  if (isNaN(quantity)) {
-    delete list[itemName];
-    console.log(`Removed ${itemName}.`);
-  } else {
-    list[itemName] -= quantity;
-    if (list[itemName] <= 0) {
-      delete list[itemName]; // Remove the item if the new value is 0 or less
-      console.log(`Removed ${itemName}.`);
+    if (quantity === null) {
+      delete list[entry];
+      console.log(`Removed "${entry}" from the list.`);
+    } else if (quantity > 0) {
+      list[entry] -= quantity;
+      if (list[entry] <= 0) {
+        delete list[entry];
+        console.log(
+          `Removed "${entry}" from the list as its quantity dropped to zero.`,
+        );
+      } else {
+        console.log(`Reduced "${entry}" by ${quantity}.`);
+      }
     } else {
-      console.log(`Subtracted ${quantity} from ${itemName}.`);
+      list[entry] = (list[entry] || 0) - quantity;
+      if (list[entry] <= 0) {
+        delete list[entry];
+        console.log(
+          `Removed "${entry}" from the list as its quantity dropped to zero.`,
+        );
+      } else {
+        console.log(`Increased "${entry}" by ${-quantity}.`);
+      }
     }
+
+    writeList(filename, list);
+    break;
   }
 
-  await writeList(filePath, list);
-}
-
-async function listItems(filePath) {
-  const list = await readList(filePath);
-  if (Object.keys(list).length === 0) {
-    console.log("Empty list.");
-    return;
+  case "ls": {
+    const list = readList(filename);
+    if (Object.keys(list).length === 0) {
+      console.log("Empty list..");
+    } else {
+      for (const [item, count] of Object.entries(list)) {
+        console.log(`- ${item} (${count})`);
+      }
+    }
+    break;
   }
 
-  for (const [key, value] of Object.entries(list)) {
-    console.log(`- ${key} (${value})`);
-  }
-}
+  case "help":
+    printHelp();
+    break;
 
-async function readList(filePath) {
-  try {
-    const data = await fs.readFile(filePath, "utf8");
-    return JSON.parse(data);
-  } catch {
-    return {}; // Return an empty object if the file doesn't exist
-  }
+  default:
+    printHelp();
+    break;
 }
-
-async function writeList(filePath, list) {
-  await fs.writeFile(filePath, JSON.stringify(list, null, 2), "utf8");
-}
-
-function showHelp() {
-  console.log(`Commands:
-- create: takes a filename as argument and create it (should have .json extension)
-- delete: takes a filename as argument and delete it
-- add <item> [quantity]: adds a specified quantity of an item to the list
-- rm <item> [quantity]: removes a specified quantity of an item from the list
-- ls: lists all items in the shopping list
-- help: prints this help message`);
-}
-
-main();
